@@ -34,7 +34,8 @@ struct elmlist{
 
 struct List{
     address first;
-};
+}; 
+
 
 
 // define a function and a procedure to allocate and deallocate an element list
