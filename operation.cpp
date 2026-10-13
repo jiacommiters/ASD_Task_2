@@ -13,23 +13,20 @@ void insert_sorted(List &L, infotype x) {
     * FS : elements in List L sorted in ascending order, x is inside List L
     */
 
-    address P = first(L);
-    address Prec = NULL;
-
-    while (P != NULL && info(P) < x) {
-        Prec = P;
-        P = next(P);
-    }
-
-    if (P != NULL && info(P) == x) {
+    //-------------your code here-------------
+    if (first(L) == NULL || x < info(first(L))) {
+        insertFirst(L, allocate(x));
         return;
     }
-
-    address Q = allocate(x);
-
-    if (Prec == NULL) {
-        insertFirst(L, Q);
-    } else {
-        insertAfter(L, Prec, Q);
+    if (info(first(L)) == x) {
+        return;
     }
+    address Prec = first(L);
+    while (next(Prec) != NULL && info(next(Prec)) < x) {
+        Prec = next(Prec);
+    }
+    if (next(Prec) == NULL || info(next(Prec)) != x) {
+        insertAfter(L, Prec, allocate(x));
+    }
+    //----------------------------------------
 }
