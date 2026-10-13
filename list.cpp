@@ -1,3 +1,4 @@
+
 #include "list.h"
 
 void createList(List &L) {
@@ -83,7 +84,6 @@ void printInfo(List L) {
     }
     cout << endl;
 };
-
 
 void insertAfter(List &L, address Prec, address P) {
     if (Prec != NULL) {
