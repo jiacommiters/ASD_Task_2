@@ -1,3 +1,4 @@
+
 #include "list.h"
 
 void createList(List &L) {
@@ -6,6 +7,8 @@ void createList(List &L) {
     */
     //-------------your code here-------------
     first(L) = NULL;
+
+
     //----------------------------------------
 }
 
@@ -41,6 +44,8 @@ void insertFirst(List &L, address P) {
     //-------------your code here-------------
     next(P) = first(L);
     first(L) = P;
+
+
     //----------------------------------------
 }
 
@@ -60,6 +65,9 @@ void insertLast(List &L, address P) {
         next(Q) = P;
     }
     //----------------------------------------
+
+        next(Q) = P;
+    }
 }
 
 address findElm(List L, infotype x) {
@@ -77,6 +85,11 @@ address findElm(List L, infotype x) {
     }
     //----------------------------------------
     return P;
+
+        P = next(P);
+    }
+
+    return NULL;
 }
 
 void deleteFirst(List &L, address &P) {
@@ -92,6 +105,12 @@ void deleteFirst(List &L, address &P) {
     } else {
         P = NULL;
     }
+    P = first(L);
+    if (P != NULL) {
+        first(L) = next(P);
+        next(P) = NULL;
+    }
+
     //----------------------------------------
 }
 
@@ -116,6 +135,21 @@ void deleteLast(List &L, address &P) {
     } else {
         P = NULL;
     }
+if (first(L) == NULL) {
+        P = NULL;
+    } else if (next(first(L)) == NULL) {
+        P = first(L);
+        first(L) = NULL;
+    } else {
+        address Q = first(L);
+        while (next(next(Q)) != NULL) {
+            Q = next(Q);
+        }
+        P = next(Q);
+        next(Q) = NULL;
+    }
+
+
     //----------------------------------------
 }
 
@@ -134,10 +168,19 @@ void printInfo(List L) {
             P = next(P);
         }
     }
+    address Q = first(L);
+    if (Q == NULL) {
+        cout<<"[empty]";
+    }
+    while (Q != NULL) {
+        cout<<info(Q)<<", ";
+        Q = next(Q);
+    }
+
+
     //----------------------------------------
     cout<<endl;
 }
-
 
 void insertAfter(List &L, address Prec, address P) {
     /**
@@ -150,9 +193,13 @@ void insertAfter(List &L, address Prec, address P) {
         next(P) = next(Prec);
         next(Prec) = P;
     }
+    next(P) = next(Prec);
+    next(Prec) = P;
+
     //----------------------------------------
 
 }
+
 void deleteAfter(List &L, address Prec, address &P) {
     /**
     * IS : Prec is not NULL
@@ -167,6 +214,11 @@ void deleteAfter(List &L, address Prec, address &P) {
     } else {
         P = NULL;
     }
+    P = next(Prec);
+    if (P != NULL) {
+        next(Prec) = next(P);
+        next(P) = NULL;
+    }
+
     //----------------------------------------
 }
-

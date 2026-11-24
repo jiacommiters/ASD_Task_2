@@ -1,3 +1,4 @@
+
 #include "list.h"
 #include "operation.h"
 
@@ -30,6 +31,19 @@ void insert_sorted(List &L, infotype x) {
         insertFirst(L, Q);
     } else {
         insertAfter(L, Prec, Q);
+    if (first(L) == NULL || x < info(first(L))) {
+        insertFirst(L, allocate(x));
+        return;
+    }
+    if (info(first(L)) == x) {
+        return;
+    }
+    address Prec = first(L);
+    while (next(Prec) != NULL && info(next(Prec)) < x) {
+        Prec = next(Prec);
+    }
+    if (next(Prec) == NULL || info(next(Prec)) != x) {
+        insertAfter(L, Prec, allocate(x));
     }
     //----------------------------------------
 }
